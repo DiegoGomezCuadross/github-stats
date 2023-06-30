@@ -1,10 +1,19 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { Global } from "@emotion/react";
+import { BrowserRouter } from "react-router-dom";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+import App from "./app";
+import { AuthProvider } from "./context/auth-context";
+import { global, reset } from "./styles";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <BrowserRouter>
+    <AuthProvider>
+      <Global styles={reset} />
+      <Global styles={global} />
+      <App />
+    </AuthProvider>
+  </BrowserRouter>
 );
