@@ -1,7 +1,7 @@
-// import styled from "@emotion/styled";
-// import { RiStarFill } from "react-icons/ri";
+import styled from "@emotion/styled";
+import { RiStarFill } from "react-icons/ri";
 
-// import { colors } from "../styles";
+import { colors } from "../styles";
 
 // const PokeImage = styled("img")`
 //   max-width: 150px;
@@ -21,13 +21,13 @@
 //   cursor: pointer;
 // `;
 
-// function formatId(id) {
-//   id = String(id);
-//   const new_id =
-//     id.length < 2 ? `#00${id}` : id.length < 3 ? `#0${id}` : `#${id}`;
+// // function formatId(id) {
+// //   id = String(id);
+// //   const new_id =
+// //     id.length < 2 ? `#00${id}` : id.length < 3 ? `#0${id}` : `#${id}`;
 
-//   return new_id;
-// }
+// //   return new_id;
+// // }
 
 // function PokemonData({ pokemon, onAddFavorite, onRemoveFavorite, isFavorite }) {
 //   const regularContent = (

@@ -6,8 +6,8 @@ import { useAuth } from "../context/auth-context";
 function LoginForm() {
   const { login } = useAuth();
   const [formData, setFormData] = useState({
-    email: "testino@mail.com",
-    password: "letmein",
+    email: "team3@mail.com",
+    password: "123456",
   });
 
   const { email, password } = formData;
