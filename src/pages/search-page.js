@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { BiSolidUser } from "react-icons/bi";
+import { RiSearchFill } from "react-icons/ri";
+import { AiFillStar } from "react-icons/ai";
 
 import Input from "../components/input";
 import UserData from "../components/user-data";
@@ -16,9 +19,7 @@ function SearchPage({ favorites, onAddFavorite, onRemoveFavorite }) {
 
   const { status, data: user, error } = state;
 
-  const isFavorite = Boolean(
-    favorites.find((fav) => fav.user_name === user?.name)
-  );
+  const isFavorite = Boolean(favorites.find((fav) => fav.name === user?.name));
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -38,12 +39,24 @@ function SearchPage({ favorites, onAddFavorite, onRemoveFavorite }) {
   }
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form
+        onSubmit={handleSubmit}
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         <Input
           name="query"
           placeholder="username"
           value={query}
           onChange={(event) => setQuery(event.target.value)}
+          style={{
+            borderRadius: "4px",
+            background: "#FFF",
+            boxShadow: "2px 2px 0px 0px rgba(0, 0, 0, 0.25)",
+          }}
         />
         <button>Search</button>
       </form>
@@ -58,10 +71,34 @@ function SearchPage({ favorites, onAddFavorite, onRemoveFavorite }) {
         />
       )}
       {status === "error" && <p style={{ color: "red" }}>{error}</p>}
+      <footer
+        style={{
+          display: "flex",
+          margin: "auto",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "50px",
+          width: "411px",
+          boxShadow: "0px -2px 0px 0px rgba(0, 0, 0, 0.25)",
+        }}
+      >
+        <Link to="/profile">
+          <BiSolidUser
+            style={{ width: "50px", height: "50px", color: "#828282" }}
+          />
+        </Link>
 
-      <Link to="/profile">Go to Profile</Link>
-      <Link to="/search">Go to Search</Link>
-      <Link to="/favorites">Go to Favorites</Link>
+        <Link to="/search">
+          <RiSearchFill
+            style={{ width: "50px", height: "50px", color: "#828282" }}
+          />
+        </Link>
+        <Link to="/favorites">
+          <AiFillStar
+            style={{ width: "50px", height: "50px", color: "#828282" }}
+          />
+        </Link>
+      </footer>
     </div>
   );
 }

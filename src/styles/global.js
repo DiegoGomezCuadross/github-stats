@@ -4,7 +4,7 @@ import { colors } from "./colors";
 import { fonts } from "./typography";
 
 export const reset = css`
-  @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+  @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;1,400&family=Source+Code+Pro:wght@400;700&display=swap");
 
   /* Box sizing rules */
   *,
