@@ -11,13 +11,12 @@ import { colors } from "./styles";
 import { useAuth } from "./context/auth-context";
 import SearchPage from "./pages/search-page";
 
-
-// import FavoritesPage from "./pages/favorites-page";
-// import {
-//   createFavorite,
-//   removeFavorite,
-//   getFavorites,
-// } from "./services/favorites-service";
+import FavoritesPage from "./pages/favorites-page";
+import {
+  createFavorite,
+  removeFavorite,
+  getFavorites,
+} from "./services/favorites-service";
 
 const ContainerSearch = styled.div`
   display: flex;
@@ -28,7 +27,7 @@ const ContainerSearch = styled.div`
   margin: auto;
   background: ${colors.gray.light};
   height: 100vh;
-`
+`;
 const StyledNotUser = styled.div`
   display: flex;
   flex-direction: column;
@@ -53,85 +52,82 @@ const IconsWrapper = styled.div`
   height: 66px;
 `;
 
-
 function AuthenticatedApp() {
   const { logout } = useAuth();
-  // const [favorites, setFavorites] = useState([]);
+  const [favorites, setFavorites] = useState([]);
 
-  // useEffect(() => {
-  //   // getFavorites().then(setFavorites);
-  // }, []);
+  useEffect(() => {
+    getFavorites().then(setFavorites);
+  }, []);
 
-  // function handleAddFavorite(pokemon) {
-  //   const data = {
-  //     pokemon_name: pokemon?.name,
-  //     pokemon_id: pokemon.id,
-  //     pokemon_type: pokemon.types[0].type?.name,
-  //     pokemon_avatar_url:
-  //       pokemon.sprites.other["official-artwork"].front_default,
-  //   };
+  function handleAddFavorite(user) {
+    const data = {
+      user_name: user?.name,
+      user_type: user.types[0].type?.name,
+      user_avatar_url: user.sprites.other["official-artwork"].front_default,
+    };
 
-  //   createFavorite(data)
-  //     .then((newFavorite) => setFavorites([...favorites, newFavorite]))
-  //     .catch(console.log);
-  // }
+    createFavorite(data)
+      .then((newFavorite) => setFavorites([...favorites, newFavorite]))
+      .catch(console.log);
+  }
 
-  // function handleRemoveFavorite(pokemon) {
-  //   const favorite = favorites.find(
-  //     (fav) => fav.pokemon_name === pokemon?.name
-  //   );
+  function handleRemoveFavorite(user) {
+    const favorite = favorites.find((fav) => fav.user_name === user?.name);
 
-  //   removeFavorite(favorite.id).then(() => {
-  //     const newFavorites = favorites.filter(
-  //       (fav) => fav.pokemon_name !== pokemon?.name
-  //     );
+    removeFavorite(favorite.id).then(() => {
+      const newFavorites = favorites.filter(
+        (fav) => fav.user_name !== user?.name
+      );
 
-  //     setFavorites(newFavorites);
-  //   });
-  // }
-
+      setFavorites(newFavorites);
+    });
+  }
   return (
-    <ContainerSearch>
-      <div>
-        <button onClick={logout}>Logout</button><br/>
-        <input type="text"></input>
-        <StyledNotUser>
-          <BsGithub style={{width: "120px", height: "120px"}}/>
-          <h3>No user...</h3>
-        </StyledNotUser>
-      </div>
-      <FooterWrapper>
-        <IconsWrapper>
-          <FaUser style={{width: "42px", height: "42px"}}/>
-          <BiSolidSearch style={{width: "42px", height: "42px"}}/>
-          <AiFillStar style={{width: "42px", height: "42px"}}/>
-        </IconsWrapper>
-      </FooterWrapper>
-    </ContainerSearch>
+    <div>
+      <button onClick={logout}>Logout</button>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <SearchPage
+              favorites={favorites}
+              onAddFavorite={handleAddFavorite}
+              onRemoveFavorite={handleRemoveFavorite}
+            />
+          }
+        />
+        <Route
+          path="favorites"
+          element={<FavoritesPage favorites={favorites} />}
+        />
+        {/* <Route path="search" element={<SearchPage search={search} />} />
+        <Route path="profile" element={<ProfilePage profile={profile} />} /> */}
+      </Routes>
+    </div>
   );
 }
 
 export default AuthenticatedApp;
 
-// return (
-//   <div>
-//     <button onClick={logout}>Logout</button>
-//     <Routes>
-//       <Route
-//         path="/"
-//         element={
-//           <SearchPage
-//             favorites={favorites}
-//             onAddFavorite={handleAddFavorite}
-//             onRemoveFavorite={handleRemoveFavorite}
-//           />
-//         }
-//       />
-//       <Route
-//         path="favorites"
-//         element={<FavoritesPage favorites={favorites} />}
-//       />
-//     </Routes>
-//   </div>
-// );
+//  return (
+//     <ContainerSearch>
+//       <div>
+//         <button onClick={logout}>Logout</button>
+//         <br />
+//         <input type="text"></input>
+//         <StyledNotUser>
+//           <BsGithub style={{ width: "120px", height: "120px" }} />
+//           <h3>No user...</h3>
+//         </StyledNotUser>
+//       </div>
+//       <FooterWrapper>
+//         <IconsWrapper>
+//           <FaUser style={{ width: "42px", height: "42px" }} />
+//           <BiSolidSearch style={{ width: "42px", height: "42px" }} />
+//           <AiFillStar style={{ width: "42px", height: "42px" }} />
+//         </IconsWrapper>
+//       </FooterWrapper>
+//     </ContainerSearch>
+//   );
 // }

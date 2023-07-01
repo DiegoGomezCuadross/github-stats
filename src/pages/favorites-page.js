@@ -1,34 +1,34 @@
-// import styled from "@emotion/styled";
-// import { Link } from "react-router-dom";
+import styled from "@emotion/styled";
+import { Link } from "react-router-dom";
 
-// const typeColors = {
-//   grass: "#74CB48",
-//   electric: "#F9CF30",
-//   fire: "#F57D31",
-// };
+const typeColors = {
+  grass: "#74CB48",
+  electric: "#F9CF30",
+  fire: "#F57D31",
+};
 
-// const Wrapper = styled("div")`
-//   display: flex;
-//   flex-direction: column;
-//   gap: 1rem;
-// `;
+const Wrapper = styled("div")`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`;
 
-// const PokeCard = styled("div")`
-//   border: 2px solid ${({ type }) => typeColors[type]};
-// `;
+const UserCard = styled("div")`
+  border: 2px solid ${({ type }) => typeColors[type]};
+`;
 
-// function FavoritesPage({ favorites }) {
-//   return (
-//     <Wrapper>
-//       {favorites.map((fav, index) => (
-//         <PokeCard key={`poke${index}`} type={fav.pokemon_type}>
-//           {fav.pokemon_name}
-//         </PokeCard>
-//       ))}
+function FavoritesPage({ favorites }) {
+  return (
+    <Wrapper>
+      {favorites.map((fav, index) => (
+        <UserCard key={`poke${index}`} type={fav.pokemon_type}>
+          {fav.pokemon_name}
+        </UserCard>
+      ))}
 
-//       <Link to="/">Go back to search</Link>
-//     </Wrapper>
-//   );
-// }
+      <Link to="/">Go back to search</Link>
+    </Wrapper>
+  );
+}
 
-// export default FavoritesPage;
+export default FavoritesPage;
