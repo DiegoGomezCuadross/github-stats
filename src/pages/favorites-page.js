@@ -2,12 +2,17 @@ import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
 import { getFavorites } from "../services/favorites-service";
 import { AiFillStar } from "react-icons/ai";
+import { BiSolidUser } from "react-icons/bi";
+import { RiSearchFill } from "react-icons/ri";
+import { Footer } from "../components/footer";
 
 const CardWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: ;
+  gap: 16px;
+  margin-top: 16px;
+  margin-bottom: 64px;
 `;
 const FavoriteCardData = styled.div`
   display: flex;
@@ -43,6 +48,14 @@ const FavoriteNames = styled.div`
 function FavoritesPage({ favorites }) {
   return (
     <>
+      <h2
+        style={{
+          display: "grid",
+          placeContent: "center",
+        }}
+      >
+        Favorites ({favorites.length})
+      </h2>
       <CardWrapper>
         {favorites.map((fav) => (
           <ContainerCard>
@@ -59,7 +72,27 @@ function FavoritesPage({ favorites }) {
           </ContainerCard>
         ))}
       </CardWrapper>
-      <Link to="/">Go back to search</Link>
+      <Footer>
+        <Link to="/profile">
+          <BiSolidUser
+            style={{
+              width: "50px",
+              height: "50px",
+              color: "#828282",
+            }}
+          />
+        </Link>
+        <Link to="/">
+          <RiSearchFill
+            style={{ width: "50px", height: "50px", color: "#828282" }}
+          />
+        </Link>
+        <Link to="/favorites">
+          <AiFillStar
+            style={{ width: "50px", height: "50px", color: "#828282" }}
+          />
+        </Link>
+      </Footer>
     </>
   );
 }

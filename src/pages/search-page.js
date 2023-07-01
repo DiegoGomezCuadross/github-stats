@@ -3,10 +3,22 @@ import { Link } from "react-router-dom";
 import { BiSolidUser } from "react-icons/bi";
 import { RiSearchFill } from "react-icons/ri";
 import { AiFillStar } from "react-icons/ai";
+import { BsGithub } from "react-icons/bs";
+
+import { Footer } from "../components/footer";
 
 import Input from "../components/input";
 import UserData from "../components/user-data";
 import { getUser } from "../services/github-stats-service";
+import styled from "@emotion/styled";
+
+const ContainerLoading = styled.div`
+  font-weight: 700;
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 427px;
+`;
 
 function SearchPage({ favorites, onAddFavorite, onRemoveFavorite }) {
   const [query, setQuery] = useState("");
@@ -59,35 +71,51 @@ function SearchPage({ favorites, onAddFavorite, onRemoveFavorite }) {
         />
         <button>Search</button>
       </form>
-      {status === "pending" && "Loading..."}
-      {status === "idle" && "Ready to search"}
-      {status === "success" && (
-        <UserData
-          user={user}
-          onAddFavorite={onAddFavorite}
-          onRemoveFavorite={onRemoveFavorite}
-          isFavorite={isFavorite}
-        />
-      )}
-      {status === "error" && <p style={{ color: "red" }}>{error}</p>}
-      <footer
-        style={{
-          display: "flex",
-          margin: "auto",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: "50px",
-          width: "411px",
-          boxShadow: "0px -2px 0px 0px rgba(0, 0, 0, 0.25)",
-        }}
-      >
+      <div style={{ display: "grid", placeContent: "center" }}>
+        {status === "pending" && (
+          <ContainerLoading>
+            <BsGithub
+              style={{
+                width: "120px",
+                height: "120px",
+                marginTop: "16px",
+                marginBottom: "12px",
+              }}
+            ></BsGithub>
+            <p>Retrieving user....</p>
+          </ContainerLoading>
+        )}
+        {status === "idle" && (
+          <ContainerLoading>
+            <BsGithub
+              style={{
+                width: "120px",
+                height: "120px",
+                marginTop: "16px",
+                marginBottom: "12px",
+              }}
+            ></BsGithub>
+            <p>No users...</p>
+          </ContainerLoading>
+        )}
+        {status === "success" && (
+          <UserData
+            user={user}
+            onAddFavorite={onAddFavorite}
+            onRemoveFavorite={onRemoveFavorite}
+            isFavorite={isFavorite}
+          />
+        )}
+        {status === "error" && <p style={{ color: "red" }}>{error}</p>}
+      </div>
+      <Footer>
         <Link to="/profile">
           <BiSolidUser
             style={{ width: "50px", height: "50px", color: "#828282" }}
           />
         </Link>
 
-        <Link to="/search">
+        <Link to="/">
           <RiSearchFill
             style={{ width: "50px", height: "50px", color: "#828282" }}
           />
@@ -97,7 +125,7 @@ function SearchPage({ favorites, onAddFavorite, onRemoveFavorite }) {
             style={{ width: "50px", height: "50px", color: "#828282" }}
           />
         </Link>
-      </footer>
+      </Footer>
     </div>
   );
 }
