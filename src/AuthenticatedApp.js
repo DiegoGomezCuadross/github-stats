@@ -18,6 +18,12 @@ import {
   getFavorites,
 } from "./services/favorites-service";
 
+const ContainerApp = styled.div`
+  width: 411px;
+  height: 731px;
+  margin: auto;
+`;
+
 const ContainerSearch = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -84,7 +90,7 @@ function AuthenticatedApp() {
     });
   }
   return (
-    <div>
+    <ContainerApp>
       <button onClick={logout}>Logout</button>
       <Routes>
         <Route
@@ -104,7 +110,7 @@ function AuthenticatedApp() {
         {/* <Route path="search" element={<SearchPage search={search} />} />
         <Route path="profile" element={<ProfilePage profile={profile} />} /> */}
       </Routes>
-    </div>
+    </ContainerApp>
   );
 }
 
