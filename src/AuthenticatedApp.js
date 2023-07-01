@@ -13,13 +13,18 @@ import { useAuth } from "./context/auth-context";
 import SearchPage from "./pages/search-page";
 import ProfilePage from "./pages/profile-page";
 import { Footer } from "./components/footer";
-
+import FollowersPage from "./pages/followers-page";
 import FavoritesPage from "./pages/favorites-page";
 import {
   createFavorite,
   removeFavorite,
   getFavorites,
 } from "./services/favorites-service";
+import {
+  getUserFollowers,
+  getUserFollowings,
+  getUserRepos,
+} from "./services/github-stats-service";
 
 const ContainerApp = styled.div`
   margin: auto;
@@ -63,6 +68,8 @@ function AuthenticatedApp() {
   const { logout } = useAuth();
   const [favorites, setFavorites] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [followers, setFollowers] = useState([]);
+  const [userQuery, setUserQuery] = useState("");
 
   useEffect(() => {
     getFavorites().then(setFavorites);
@@ -90,6 +97,16 @@ function AuthenticatedApp() {
       setFavorites(newFavorites);
     });
   }
+
+  function handleFollowers() {
+    getUserFollowers(userQuery)
+      .then((data) => {
+        setFollowers(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
   return (
     <ContainerApp>
       <BiLogOut
@@ -108,6 +125,8 @@ function AuthenticatedApp() {
           path="/"
           element={
             <SearchPage
+              onGetFollowers={handleFollowers}
+              onAddUserQuery={setUserQuery}
               favorites={favorites}
               onAddFavorite={handleAddFavorite}
               onRemoveFavorite={handleRemoveFavorite}
@@ -117,6 +136,10 @@ function AuthenticatedApp() {
         <Route
           path="favorites"
           element={<FavoritesPage favorites={favorites} />}
+        />
+        <Route
+          path="followers"
+          element={<FollowersPage followers={followers} />}
         />
         <Route path="profile" element={<ProfilePage />} />
       </Routes>

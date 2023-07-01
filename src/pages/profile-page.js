@@ -101,3 +101,23 @@ function ProfilePage() {
 }
 
 export default ProfilePage;
+
+// export function getRepos(username) {
+//   return fetch(BASE_URI + username.toLowerCase() + "repos").then((response) =>
+//     response.json()
+//   );
+// }
+
+// export function getFollower(username) {
+//   return fetch(BASE_URI + username.toLowerCase() + "followers").then(
+//     (response) => response.json()
+//   );
+// }
+
+// function ReposPage() {
+//   return <h1>Repos</h1>;
+// }
+// async function goToRepos(user) {
+//   console.log(user);
+//   // const dataRepos = await getRepos(user.login);
+// }
