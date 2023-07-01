@@ -20,7 +20,13 @@ const ContainerLoading = styled.div`
   margin-bottom: 427px;
 `;
 
-function SearchPage({ favorites, onAddFavorite, onRemoveFavorite }) {
+function SearchPage({
+  favorites,
+  onAddFavorite,
+  onRemoveFavorite,
+  onAddUserQuery,
+  onGetFollowers,
+}) {
   const [query, setQuery] = useState("");
   const [state, setState] = useState({
     status: "idle", // idle = inactive // success // error // pending
@@ -39,6 +45,7 @@ function SearchPage({ favorites, onAddFavorite, onRemoveFavorite }) {
     getUser(query)
       .then((data) => {
         setState({ status: "success", data, error: null });
+        onAddUserQuery(query);
       })
       .catch((_error) => {
         setState({
@@ -101,6 +108,7 @@ function SearchPage({ favorites, onAddFavorite, onRemoveFavorite }) {
         {status === "success" && (
           <UserData
             user={user}
+            onGetFollowers={onGetFollowers}
             onAddFavorite={onAddFavorite}
             onRemoveFavorite={onRemoveFavorite}
             isFavorite={isFavorite}

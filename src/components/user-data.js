@@ -5,6 +5,7 @@ import { GoPeople } from "react-icons/go";
 import { RiUserHeartFill } from "react-icons/ri";
 import { RiCodeBoxLine } from "react-icons/ri";
 import { colors } from "../styles";
+import { Link } from "react-router-dom";
 
 const UserImage = styled("img")`
   max-width: 150px;
@@ -66,7 +67,13 @@ const ContainerData = styled("div")`
   place-content: center;
 `;
 
-function UserData({ user, onAddFavorite, onRemoveFavorite, isFavorite }) {
+function UserData({
+  user,
+  onAddFavorite,
+  onRemoveFavorite,
+  isFavorite,
+  onGetFollowers,
+}) {
   const regularContent = (
     <>
       <RiStarFill color={colors.gray.light} style={{ cursor: "pointer" }} />
@@ -97,20 +104,22 @@ function UserData({ user, onAddFavorite, onRemoveFavorite, isFavorite }) {
       </h3>
       <p>{user?.bio}</p>
       <ContainerData>
-        <ContainerIcons>
-          <ContainerInfo>
-            <GoPeople
-              style={{
-                width: "60px",
-                height: "60px",
-                color: "#2D9CDB",
-                margin: "auto",
-              }}
-            />
-            <FontsNumber>{user.followers}</FontsNumber>
-            <Fonts>Followers</Fonts>
-          </ContainerInfo>
-        </ContainerIcons>
+        <Link onClick={onGetFollowers} to="/followers">
+          <ContainerIcons>
+            <ContainerInfo>
+              <GoPeople
+                style={{
+                  width: "60px",
+                  height: "60px",
+                  color: "#2D9CDB",
+                  margin: "auto",
+                }}
+              />
+              <FontsNumber>{user.followers}</FontsNumber>
+              <Fonts>Followers</Fonts>
+            </ContainerInfo>
+          </ContainerIcons>
+        </Link>
 
         <ContainerIcons>
           <ContainerInfo>
