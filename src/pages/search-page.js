@@ -10,7 +10,6 @@ import { getUser } from "../services/github-stats-service";
 
 function SearchPage({ favorites, onAddFavorite, onRemoveFavorite }) {
   const [query, setQuery] = useState("");
-
   const [state, setState] = useState({
     status: "idle", // idle = inactive // success // error // pending
     data: null,

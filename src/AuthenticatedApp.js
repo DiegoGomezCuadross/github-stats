@@ -61,6 +61,7 @@ const IconsWrapper = styled.div`
 function AuthenticatedApp() {
   const { logout } = useAuth();
   const [favorites, setFavorites] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     getFavorites().then(setFavorites);

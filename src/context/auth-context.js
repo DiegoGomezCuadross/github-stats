@@ -8,10 +8,19 @@ const AuthContext = createContext();
 
 function AuthProvider(props) {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // getUser().then(user => setUser(user)).catch(error => console.log(error))
-    getUser().then(setUser).catch(console.log);
+    getUser()
+      .then((data) => {
+        setUser(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
   }, []);
 
   function login(credentials) {
@@ -33,6 +42,8 @@ function AuthProvider(props) {
       setUser(null);
     });
   }
+
+  if (loading) return <p>Loading...</p>;
 
   const value = {
     user,
