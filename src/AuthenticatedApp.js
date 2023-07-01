@@ -11,6 +11,7 @@ import { BiLogOut } from "react-icons/bi";
 
 import { useAuth } from "./context/auth-context";
 import SearchPage from "./pages/search-page";
+import ProfilePage from "./pages/profile-page";
 
 import FavoritesPage from "./pages/favorites-page";
 import {
@@ -115,8 +116,7 @@ function AuthenticatedApp() {
           path="favorites"
           element={<FavoritesPage favorites={favorites} />}
         />
-        {/* <Route path="search" element={<SearchPage search={search} />} />
-        <Route path="profile" element={<ProfilePage profile={profile} />} /> */}
+        <Route path="profile" element={<ProfilePage />} />
       </Routes>
     </ContainerApp>
   );

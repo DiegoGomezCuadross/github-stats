@@ -2,6 +2,8 @@ import { useState } from "react";
 
 import Input from "./input";
 import { useAuth } from "../context/auth-context";
+import { Button } from "./button";
+import { Formulario } from "./form";
 
 function LoginForm() {
   const { login } = useAuth();
@@ -25,7 +27,7 @@ function LoginForm() {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <Formulario onSubmit={handleSubmit}>
         <Input
           id="email"
           type="email"
@@ -44,8 +46,8 @@ function LoginForm() {
           placeholder="********"
           label="Password"
         />
-        <button type="submit">Login</button>
-      </form>
+        <Button type="submit">Login</Button>
+      </Formulario>
     </div>
   );
 }

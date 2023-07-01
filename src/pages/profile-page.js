@@ -1,17 +1,21 @@
-import { useState } from "react";
-
-import Input from "./input";
+import styled from "@emotion/styled";
+import { getUser } from "../services/user-service";
 import { useAuth } from "../context/auth-context";
-import { Formulario } from "./form";
-import { Button } from "./button";
+import Input from "../components/input";
+import { colors } from "../styles";
+import { Link } from "react-router-dom";
+import { Formulario } from "../components/form";
+import { useState } from "react";
+import { Button } from "../components/button";
 
-function SignupForm() {
-  const { signup } = useAuth();
+function ProfilePage() {
+  const { user, updateProfile } = useAuth();
+  console.log(user);
   const [formData, setFormData] = useState({
-    email: "",
+    email: user.email,
     password: "",
-    first_name: "",
-    last_name: "",
+    first_name: user.first_name,
+    last_name: user.last_name,
   });
 
   const { email, password, first_name, last_name } = formData;
@@ -26,7 +30,7 @@ function SignupForm() {
 
     console.log({ email, password, first_name, last_name });
 
-    signup(formData);
+    updateProfile(formData);
   }
 
   return (
@@ -64,10 +68,11 @@ function SignupForm() {
           label="Last Name"
           placeholder="Apaestegui"
         />
-        <Button type="submit">Create Account</Button>
+        <Button type="submit">Update</Button>
       </Formulario>
+      <Link to="/">Go to search</Link>
     </div>
   );
 }
 
-export default SignupForm;
+export default ProfilePage;
