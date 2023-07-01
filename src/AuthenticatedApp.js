@@ -7,6 +7,7 @@ import { AiFillStar } from "react-icons/ai";
 import { FaUser } from "react-icons/fa";
 import { BsGithub } from "react-icons/bs";
 import { colors } from "./styles";
+import { BiLogOut } from "react-icons/bi";
 
 import { useAuth } from "./context/auth-context";
 import SearchPage from "./pages/search-page";
@@ -19,8 +20,6 @@ import {
 } from "./services/favorites-service";
 
 const ContainerApp = styled.div`
-  width: 411px;
-  height: 731px;
   margin: auto;
 `;
 
@@ -68,10 +67,11 @@ function AuthenticatedApp() {
 
   function handleAddFavorite(user) {
     const data = {
-      user_name: user?.name,
-      user_type: user.types[0].type?.name,
-      user_avatar_url: user.sprites.other["official-artwork"].front_default,
+      name: user.name,
+      username: user.login,
+      avatar_url: user.avatar_url,
     };
+    console.log(data);
 
     createFavorite(data)
       .then((newFavorite) => setFavorites([...favorites, newFavorite]))
@@ -79,19 +79,27 @@ function AuthenticatedApp() {
   }
 
   function handleRemoveFavorite(user) {
-    const favorite = favorites.find((fav) => fav.user_name === user?.name);
+    const favorite = favorites.find((fav) => fav.name === user?.name);
 
     removeFavorite(favorite.id).then(() => {
-      const newFavorites = favorites.filter(
-        (fav) => fav.user_name !== user?.name
-      );
+      const newFavorites = favorites.filter((fav) => fav.name !== user?.name);
 
       setFavorites(newFavorites);
     });
   }
   return (
     <ContainerApp>
-      <button onClick={logout}>Logout</button>
+      <BiLogOut
+        onClick={logout}
+        style={{
+          display: "grid",
+          placeContent: "center",
+          width: "50px",
+          height: "50px",
+          color: "#828282",
+          margin: "auto",
+        }}
+      />
       <Routes>
         <Route
           path="/"
