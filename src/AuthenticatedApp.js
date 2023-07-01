@@ -12,6 +12,7 @@ import { BiLogOut } from "react-icons/bi";
 import { useAuth } from "./context/auth-context";
 import SearchPage from "./pages/search-page";
 import ProfilePage from "./pages/profile-page";
+import { Footer } from "./components/footer";
 
 import FavoritesPage from "./pages/favorites-page";
 import {
@@ -119,6 +120,7 @@ function AuthenticatedApp() {
         />
         <Route path="profile" element={<ProfilePage />} />
       </Routes>
+      <Footer></Footer>
     </ContainerApp>
   );
 }

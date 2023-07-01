@@ -2,8 +2,12 @@ import styled from "@emotion/styled";
 import { getUser } from "../services/user-service";
 import { useAuth } from "../context/auth-context";
 import Input from "../components/input";
-import { colors } from "../styles";
 import { Link } from "react-router-dom";
+import { BiSolidUser } from "react-icons/bi";
+import { RiSearchFill } from "react-icons/ri";
+import { AiFillStar } from "react-icons/ai";
+import { Footer } from "../components/footer";
+import { colors } from "../styles";
 import { Formulario } from "../components/form";
 import { useState } from "react";
 import { Button } from "../components/button";
@@ -35,42 +39,63 @@ function ProfilePage() {
 
   return (
     <div>
-      <Formulario onSubmit={handleSubmit}>
-        <Input
-          id="email"
-          type="email"
-          name="email"
-          value={email}
-          onChange={handleChange}
-          placeholder="example@mail.com"
-          label="Email"
-        />
-        <Input
-          id="password"
-          name="password"
-          type="password"
-          value={password}
-          onChange={handleChange}
-          placeholder="********"
-          label="Password"
-        />
-        <Input
-          name="first_name"
-          value={first_name}
-          onChange={handleChange}
-          label="First Name"
-          placeholder="Paty"
-        />
-        <Input
-          name="last_name"
-          value={last_name}
-          onChange={handleChange}
-          label="Last Name"
-          placeholder="Apaestegui"
-        />
-        <Button type="submit">Update</Button>
-      </Formulario>
-      <Link to="/">Go to search</Link>
+      <div>
+        <Formulario onSubmit={handleSubmit}>
+          <Input
+            id="email"
+            type="email"
+            name="email"
+            value={email}
+            onChange={handleChange}
+            placeholder="example@mail.com"
+            label="Email"
+          />
+          <Input
+            id="password"
+            name="password"
+            type="password"
+            value={password}
+            onChange={handleChange}
+            placeholder="********"
+            label="Password"
+          />
+          <Input
+            name="first_name"
+            value={first_name}
+            onChange={handleChange}
+            label="First Name"
+            placeholder="Paty"
+          />
+          <Input
+            name="last_name"
+            value={last_name}
+            onChange={handleChange}
+            label="Last Name"
+            placeholder="Apaestegui"
+          />
+          <Button type="submit" style={{ marginBottom: "200px" }}>
+            Update
+          </Button>
+        </Formulario>
+      </div>
+      <Footer>
+        <Link to="/profile">
+          <BiSolidUser
+            style={{ width: "50px", height: "50px", color: "#828282" }}
+          />
+        </Link>
+
+        <Link to="/">
+          <RiSearchFill
+            style={{ width: "50px", height: "50px", color: "#828282" }}
+          />
+        </Link>
+        <Link to="/favorites">
+          <AiFillStar
+            style={{ width: "50px", height: "50px", color: "#828282" }}
+          />
+        </Link>
+      </Footer>
     </div>
   );
 }
