@@ -14,6 +14,8 @@ import SearchPage from "./pages/search-page";
 import ProfilePage from "./pages/profile-page";
 import { Footer } from "./components/footer";
 import FollowersPage from "./pages/followers-page";
+import FollowingsPage from "./pages/followings-page";
+import RepositoriesPage from "./pages/repos-page";
 import FavoritesPage from "./pages/favorites-page";
 import {
   createFavorite,
@@ -69,6 +71,8 @@ function AuthenticatedApp() {
   const [favorites, setFavorites] = useState([]);
   const [loading, setLoading] = useState(false);
   const [followers, setFollowers] = useState([]);
+  const [followings, setFollowings] = useState([]);
+  const [repositories, setRepositories] = useState([]);
   const [userQuery, setUserQuery] = useState("");
 
   useEffect(() => {
@@ -107,6 +111,27 @@ function AuthenticatedApp() {
         console.log(error);
       });
   }
+
+  function handleFollowings() {
+    getUserFollowings(userQuery)
+      .then((data) => {
+        setFollowings(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  function handleRepositories() {
+    getUserRepos(userQuery)
+      .then((data) => {
+        setRepositories(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   return (
     <ContainerApp>
       <BiLogOut
@@ -126,6 +151,8 @@ function AuthenticatedApp() {
           element={
             <SearchPage
               onGetFollowers={handleFollowers}
+              onGetFollowings={handleFollowings}
+              onGetRepositories={handleRepositories}
               onAddUserQuery={setUserQuery}
               favorites={favorites}
               onAddFavorite={handleAddFavorite}
@@ -140,6 +167,14 @@ function AuthenticatedApp() {
         <Route
           path="followers"
           element={<FollowersPage followers={followers} />}
+        />
+        <Route
+          path="followings"
+          element={<FollowingsPage followings={followings} />}
+        />
+        <Route
+          path="repos"
+          element={<RepositoriesPage repositories={repositories} />}
         />
         <Route path="profile" element={<ProfilePage />} />
       </Routes>

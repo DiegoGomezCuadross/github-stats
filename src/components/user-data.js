@@ -73,6 +73,8 @@ function UserData({
   onRemoveFavorite,
   isFavorite,
   onGetFollowers,
+  onGetFollowings,
+  onGetRepositories,
 }) {
   const regularContent = (
     <>
@@ -120,27 +122,28 @@ function UserData({
             </ContainerInfo>
           </ContainerIcons>
         </Link>
-
-        <ContainerIcons>
-          <ContainerInfo>
-            <RiUserHeartFill
-              style={{ width: "60px", height: "60px", color: "orange" }}
-            />
-            <FontsNumber>{user.following}</FontsNumber>
-            <Fonts>Followings</Fonts>
-          </ContainerInfo>
-        </ContainerIcons>
-
-        <ContainerIcons>
-          <ContainerInfo>
-            <GoRepo
-              style={{ width: "60px", height: "60px", color: "#219653" }}
-            />
-            <FontsNumber>{user.public_repos}</FontsNumber>
-            <Fonts style={{ width: "116px" }}>Public Repos</Fonts>
-          </ContainerInfo>
-        </ContainerIcons>
-
+        <Link onClick={onGetFollowings} to="/followings">
+          <ContainerIcons>
+            <ContainerInfo>
+              <RiUserHeartFill
+                style={{ width: "60px", height: "60px", color: "orange" }}
+              />
+              <FontsNumber>{user.following}</FontsNumber>
+              <Fonts>Followings</Fonts>
+            </ContainerInfo>
+          </ContainerIcons>
+        </Link>
+        <Link onClick={onGetRepositories} to="/repos">
+          <ContainerIcons>
+            <ContainerInfo>
+              <GoRepo
+                style={{ width: "60px", height: "60px", color: "#219653" }}
+              />
+              <FontsNumber>{user.public_repos}</FontsNumber>
+              <Fonts style={{ width: "116px" }}>Public Repos</Fonts>
+            </ContainerInfo>
+          </ContainerIcons>
+        </Link>
         <ContainerIcons>
           <ContainerInfo>
             <RiCodeBoxLine
