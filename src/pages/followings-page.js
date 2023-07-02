@@ -47,8 +47,27 @@ const FavoriteNames = styled.div`
 
 function FollowingsPage({ followings }) {
   console.log(followings);
+
+  const iconStyles = {
+    width: "50px",
+    height: "50px",
+    color: "#BDBDBD",
+  };
+
+  const hoverStyles = {
+    color: "#828282",
+  };
   return (
     <>
+      <h2
+        style={{
+          display: "grid",
+          placeContent: "center",
+          fontWeight: "400",
+        }}
+      >
+        Followings ({followings.length})
+      </h2>
       <CardWrapper>
         {followings.map((foll) => (
           <ContainerCard>
@@ -58,30 +77,51 @@ function FollowingsPage({ followings }) {
                 <p>{foll.login}</p>
               </FavoriteNames>
             </FavoriteCardData>
-            <AiFillStar
-              style={{ color: "#F2C94C", width: "24px", height: "24px" }}
-            />
           </ContainerCard>
         ))}
       </CardWrapper>
       <Footer>
-        <Link to="/profile">
+        <Link
+          to="/profile"
+          style={iconStyles}
+          onMouseOver={(e) => {
+            e.target.style.color = hoverStyles.color;
+          }}
+          onMouseOut={(e) => {
+            e.target.style.color = iconStyles.color;
+          }}
+        >
           <BiSolidUser
-            style={{
-              width: "50px",
-              height: "50px",
-              color: "#828282",
-            }}
+            style={{ width: "50px", height: "50px", color: "#BDBDBD" }}
           />
         </Link>
-        <Link to="/">
+
+        <Link
+          to="/"
+          style={iconStyles}
+          onMouseOver={(e) => {
+            e.target.style.color = hoverStyles.color;
+          }}
+          onMouseOut={(e) => {
+            e.target.style.color = iconStyles.color;
+          }}
+        >
           <RiSearchFill
-            style={{ width: "50px", height: "50px", color: "#828282" }}
+            style={{ width: "50px", height: "50px", color: "#BDBDBD" }}
           />
         </Link>
-        <Link to="/favorites">
+        <Link
+          to="/favorites"
+          style={iconStyles}
+          onMouseOver={(e) => {
+            e.target.style.color = hoverStyles.color;
+          }}
+          onMouseOut={(e) => {
+            e.target.style.color = iconStyles.color;
+          }}
+        >
           <AiFillStar
-            style={{ width: "50px", height: "50px", color: "#828282" }}
+            style={{ width: "50px", height: "50px", color: "#BDBDBD" }}
           />
         </Link>
       </Footer>

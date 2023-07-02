@@ -9,6 +9,11 @@ import { Footer } from "../components/footer";
 import { CardWrapper } from "./followings-page";
 import { colors } from "../styles";
 
+const icon = {
+  with: "50ppx",
+  height: "50px",
+};
+
 function getLanguageColor(repo) {
   const languageColors = {
     JavaScript: "#f1e05a",
@@ -69,6 +74,8 @@ const ContainerCard = styled.div`
 
 const RepoName = styled.div`
   color: #2d9cdb;
+  font-size: 16px;
+  font-weight: 700;
 `;
 const LanguageInfo = styled.div`
   display: flex;
@@ -87,8 +94,28 @@ const LanguageName = styled.div`
 
 function RepositoriesPage({ repositories }) {
   console.log(repositories);
+
+  const iconStyles = {
+    width: "50px",
+    height: "50px",
+    color: "#BDBDBD",
+  };
+
+  const hoverStyles = {
+    color: "#828282",
+  };
+
   return (
     <>
+      <h2
+        style={{
+          display: "grid",
+          placeContent: "center",
+          fontWeight: "400",
+        }}
+      >
+        Public Repos ({repositories.length})
+      </h2>
       <CardWrapper>
         {repositories.map((repo) => (
           <ContainerCard>
@@ -110,26 +137,49 @@ function RepositoriesPage({ repositories }) {
             </LanguageInfo>
           </ContainerCard>
         ))}
-        <Link to="/">Go to search</Link>
       </CardWrapper>
       <Footer>
-        <Link to="/profile">
+        <Link
+          to="/profile"
+          style={iconStyles}
+          onMouseOver={(e) => {
+            e.target.style.color = hoverStyles.color;
+          }}
+          onMouseOut={(e) => {
+            e.target.style.color = iconStyles.color;
+          }}
+        >
           <BiSolidUser
-            style={{
-              width: "50px",
-              height: "50px",
-              color: "#828282",
-            }}
+            style={{ width: "50px", height: "50px", color: "#BDBDBD" }}
           />
         </Link>
-        <Link to="/">
+
+        <Link
+          to="/"
+          style={iconStyles}
+          onMouseOver={(e) => {
+            e.target.style.color = hoverStyles.color;
+          }}
+          onMouseOut={(e) => {
+            e.target.style.color = iconStyles.color;
+          }}
+        >
           <RiSearchFill
-            style={{ width: "50px", height: "50px", color: "#828282" }}
+            style={{ width: "50px", height: "50px", color: "#BDBDBD" }}
           />
         </Link>
-        <Link to="/favorites">
+        <Link
+          to="/favorites"
+          style={iconStyles}
+          onMouseOver={(e) => {
+            e.target.style.color = hoverStyles.color;
+          }}
+          onMouseOut={(e) => {
+            e.target.style.color = iconStyles.color;
+          }}
+        >
           <AiFillStar
-            style={{ width: "50px", height: "50px", color: "#828282" }}
+            style={{ width: "50px", height: "50px", color: "#BDBDBD" }}
           />
         </Link>
       </Footer>

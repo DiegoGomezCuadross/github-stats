@@ -57,6 +57,16 @@ function SearchPage({
         });
       });
   }
+
+  const iconStyles = {
+    width: "50px",
+    height: "50px",
+    color: "#BDBDBD",
+  };
+
+  const hoverStyles = {
+    color: "#828282",
+  };
   return (
     <div>
       <form
@@ -120,21 +130,49 @@ function SearchPage({
         )}
         {status === "error" && <p style={{ color: "red" }}>{error}</p>}
       </div>
+
       <Footer>
-        <Link to="/profile">
+        <Link
+          to="/profile"
+          style={iconStyles}
+          onMouseOver={(e) => {
+            e.target.style.color = hoverStyles.color;
+          }}
+          onMouseOut={(e) => {
+            e.target.style.color = iconStyles.color;
+          }}
+        >
           <BiSolidUser
-            style={{ width: "50px", height: "50px", color: "#828282" }}
+            style={{ width: "50px", height: "50px", color: "#BDBDBD" }}
           />
         </Link>
 
-        <Link to="/">
+        <Link
+          to="/"
+          style={iconStyles}
+          onMouseOver={(e) => {
+            e.target.style.color = hoverStyles.color;
+          }}
+          onMouseOut={(e) => {
+            e.target.style.color = iconStyles.color;
+          }}
+        >
           <RiSearchFill
-            style={{ width: "50px", height: "50px", color: "#828282" }}
+            style={{ width: "50px", height: "50px", color: "#BDBDBD" }}
           />
         </Link>
-        <Link to="/favorites">
+        <Link
+          to="/favorites"
+          style={iconStyles}
+          onMouseOver={(e) => {
+            e.target.style.color = hoverStyles.color;
+          }}
+          onMouseOut={(e) => {
+            e.target.style.color = iconStyles.color;
+          }}
+        >
           <AiFillStar
-            style={{ width: "50px", height: "50px", color: "#828282" }}
+            style={{ width: "50px", height: "50px", color: "#BDBDBD" }}
           />
         </Link>
       </Footer>
