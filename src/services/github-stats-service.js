@@ -16,8 +16,8 @@ export function getUserFollowers(query) {
 
 export function getUserFollowings(query) {
   console.log(BASE_URI + query.toLowerCase());
-  return fetch(BASE_URI + query.toLowerCase() + "/followings").then(
-    (response) => response.json()
+  return fetch(BASE_URI + query.toLowerCase() + "/following").then((response) =>
+    response.json()
   );
 }
 

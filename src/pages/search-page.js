@@ -26,6 +26,8 @@ function SearchPage({
   onRemoveFavorite,
   onAddUserQuery,
   onGetFollowers,
+  onGetFollowings,
+  onGetRepositories,
 }) {
   const [query, setQuery] = useState("");
   const [state, setState] = useState({
@@ -109,6 +111,8 @@ function SearchPage({
           <UserData
             user={user}
             onGetFollowers={onGetFollowers}
+            onGetFollowings={onGetFollowings}
+            onGetRepositories={onGetRepositories}
             onAddFavorite={onAddFavorite}
             onRemoveFavorite={onRemoveFavorite}
             isFavorite={isFavorite}
